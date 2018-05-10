@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+   <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script>
+$(document).ready(function() {
+  $('#hit').click(function() {
+    //alert($('#term').val());
+	var fn = $('#firstname').val();
+	var ln=$('#lastname').val();
+	//alert(bla);
+	var myJSON = JSON.stringify({"username":fn,"lastname":ln});
+	document.getElementById("demo").innerHTML = myJSON;
+	
+	
+  });
+});
+</script>
+
+<script>
+
+$(document).ready(function() {
+  $('#hit1').click(function() {
+    //alert($('#term').val());
+	var fn = $('#firstname').val();
+	//var ln=$('#lastname').val();
+	//alert(bla);
+	var myJSON = JSON.stringify({"username":fn});
+	//document.getElementById("demo").innerHTML = myJSON;
+	alert(myJSON);
+	$.ajax({
+        type: "POST",
+        url: "http://localhost:3333",
+        dataType: "json",
+        contentType: 'application/json', //see that
+        data: myJSON
+       }).done(function ( data ) {
+          alert("ajax callback response: "+JSON.stringify(data));
+		  alert(myJSON);
+      });
+
+        });
+	
+  });
+});
+
+    </script>
+</head>
+<body>
+
+<div id="search">
+  <input id="firstname" type="text" value=""/>
+  <input id="lastname" type="text" value=""/>
+
+  <button id="hit" type="button" name="">Submit</button>
+  <button id="hit1" type="button" name="">Submit</button>
+  <p id="demo"></p>
+
+</div>
+
+
+</body>
+</html>
